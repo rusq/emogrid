@@ -5,12 +5,15 @@ Emogrid produces a macros to be pasted into Slack to produce emoji grids.
 ## Usage
 
 ```sh
-emogrid [flags] <prefix> [x] [y]
+Usage: ./emogrid [flags] <prefix> [x] [y]
 Where x is the number of emojis in the line (default:  2)
       y is the number of lines              (default:  2)
 
-Flags:  -start int
-    	Start with this number (default 1)
+Flags:
+  -sep string
+        Separator between prefix and number (default "-")
+  -start int
+        Start with this number (default 1
 ```
 
 For example, running:
