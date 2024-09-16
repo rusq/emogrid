@@ -13,9 +13,12 @@ const (
 	defY = 2
 )
 
-var startWith = flag.Int("start", 1, "Start with this number")
+var (
+	startWith = flag.Int("start", 1, "Start with this number")
+	sep       = flag.String("sep", "-", "Separator between prefix and number")
+)
 
-func init() { flag.Usage = Usage }
+func init() { flag.Usage = usage }
 
 func main() {
 	flag.Parse()
@@ -36,7 +39,7 @@ func main() {
 	n := *startWith
 	for col := 0; col < x; col++ {
 		for row := 0; row < y; row++ {
-			fmt.Printf(":%s-%d:", prefix, n)
+			fmt.Printf(":%s%s%d:", prefix, *sep, n)
 			n++
 		}
 		fmt.Println()
@@ -51,10 +54,10 @@ func a2iOrDie(s string) int {
 	return i
 }
 
-func Usage() {
+func usage() {
 	fmt.Fprintf(flag.CommandLine.Output(), "Usage: %s [flags] <prefix> [x] [y]\n", os.Args[0])
 	fmt.Fprintf(flag.CommandLine.Output(), "Where x is the number of emojis in the line (default:  %d)\n", defX)
 	fmt.Fprintf(flag.CommandLine.Output(), "      y is the number of lines              (default:  %d)\n\n", defY)
-	fmt.Fprintf(flag.CommandLine.Output(), "Flags:")
+	fmt.Fprintf(flag.CommandLine.Output(), "Flags:\n")
 	flag.PrintDefaults()
 }
